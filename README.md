@@ -20,6 +20,10 @@ Tools Used:
     React ( more comfortable than Vue )
     Create React App ( easy to use than custom webpack config build setup )
 
+    Eslint
+    Cypress
+    Bootstrap 4
+
 ## `yarn start` `npm run start`
 
 start running at http://localhost:3000 for development mode
