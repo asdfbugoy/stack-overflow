@@ -1,19 +1,40 @@
 import React from 'react';
-import Questions from 'components/questions';
 import { useMst } from 'stores';
+import {
+    HashRouter as Router,
+    Switch,
+    Route
+    // Link,
+    // useRouteMatch,
+    // useParams
+} from 'react-router-dom';
+import List from 'pages';
+import Header from 'components/Header';
+import Detailed from 'pages/Detailed';
+import Add from 'pages/Add';
 
-const App = () => <div data-cy="app" className="app">
-    <header data-cy="header" className="border-bottom mb-3 shadow p-3">
-        <div className="">
-            <i className="fa fa-stack-overflow"></i> Stack<strong>Overflow</strong> <small>Challenge</small>
-        </div>
-    </header>
-    <article data-cy="main" className="container mb-3">
-        <Questions store={useMst()} />
-    </article>
-    <footer data-cy="footer" className="text-center">
-        <div className="card-body bg-dark text-white"><i className="fa fa-stack-overflow"></i> Stack Overflow:  Front-End / Challenge © 2020 Stock Overflow: exam taken by @Francis Samande Declaro</div>
-    </footer>
-</div>;
+const App = () => {
+    return <div data-cy="app" className="app">
+        <Router>
+            <Header />
+            <article data-cy="main" className="container mb-3">
+                <Switch>
+                    <Route path="/add">
+                        <Add store={useMst()} />
+                    </Route>
+                    <Route path="/:id">
+                        <Detailed store={useMst()} />
+                    </Route>
+                    <Route path="/">
+                        <List store={useMst()} />
+                    </Route>
+                </Switch>
+            </article>
+        </Router>
 
+        <footer data-cy="footer" className="text-center">
+            <div className="card-body bg-dark text-white"><i className="fa fa-stack-overflow"></i> Stack Overflow:  Front-End / Challenge © 2020 Stock Overflow: exam taken by @Francis Samande Declaro</div>
+        </footer>
+    </div>;
+};
 export default App;

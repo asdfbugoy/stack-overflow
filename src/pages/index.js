@@ -1,53 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import Question from 'components/Question';
 
-const Question = observer((props) => {
-    const { data } = props;
-    const { title, body, score, tags, owner, answer_count, view_count } = data;
-    return <article data-cy="question" className="row border-bottom mb-3 pb-3">
-        <div data-cy="status" className="col-auto text-center">
-            <div>
-                <button className="btn btn-sm btn-light"><i className="fa fa-caret-up"></i></button>
-                <div> <span className="badge badge-warning">{score} votes</span> </div>
-                <div className="btn btn-sm btn-light"><i className="fa fa-caret-down"></i></div>
-            </div>
-            <div>
-                <div><span className="badge badge-light">{answer_count}</span> answers</div>
-            </div>
-            <div><span className="badge badge-light">{view_count}</span> views</div>
-        </div>
-        <div data-cy="information" className="col">
-            <div className="overflow-hidden">{title}</div>
-            <div className="overflow-hidden">{body}</div>
-            <div className="mb-3">
-                {tags.map((d, i) => <span key={i} className="badge badge-info mr-1">{d}</span>)}
-            </div>
-            {owner && <div className="row text-right">
-                <div className="col p-0"><img height="32" src={`${owner.profile_image ? owner.profile_image : 'https://via.placeholder.com/32'}`} alt="" /></div>
-                <div className="col-auto">
-                    <div>asked 0 mins ago</div>
-                    <div>{owner.display_name}</div>
-                    <div>
-                        <span className="badge badge-danger mr-1">{owner.badge_counts.gold}</span>
-                        <span className="badge badge-light mr-1">{owner.badge_counts.silver}</span>
-                        <span className="badge badge-warning mr-1">{owner.badge_counts.bronze}</span>
-                    </div>
-                </div>
-            </div>}
-        </div>
-    </article>;
-});
-
-Question.propTypes = {
-    data: PropTypes.object
-};
-
-const Questions = props => {
+const List = props => {
     const { store } = props;
     const { questions } = store;
     React.useEffect(() => {
-        store.fetchQuestionsAPI();
+        store.questions.length === 0 && store.fetchQuestionsAPI();
     }, [store]);
     return <section data-cy="questions">
         <header className="border-bottom pb-3 mb-3">
@@ -56,7 +16,7 @@ const Questions = props => {
                 <div className="col-auto"><div className="btn btn-sm btn-primary">Ask Question</div></div>
             </div>
             <div className="row">
-                <div className="col-sm-auto mb-3 mb-sm-0">200 questions</div>
+                <div className="col-sm-auto mb-3 mb-sm-0">{store.questions.length} questions</div>
                 <div className="col-sm">
                     <div className="row">
                         <div className="col text-sm-right">
@@ -76,7 +36,7 @@ const Questions = props => {
             </div>
         </header>
 
-        {questions.map((d, i) => <Question key={i} data={d} />)}
+        {questions.map((d, i) => <Question key={i} data={d} id={i} />)}
 
         <nav data-cy="pagination">
             <ul className="pagination justify-content-center table-responsive">
@@ -90,8 +50,8 @@ const Questions = props => {
     </section>;
 };
 
-Questions.propTypes = {
+List.propTypes = {
     store: PropTypes.object
 };
 
-export default observer(Questions);
+export default observer(List);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { types, flow, applySnapshot, getSnapshot } from 'mobx-state-tree';
+import { types, applySnapshot } from 'mobx-state-tree';
 import Question from './Question';
 import MockQuestions from 'mock-api/questions.json';
 
@@ -13,6 +13,9 @@ const Store = types.model({
     },
     fetchQuestionsAPI() {
         applySnapshot(self.questions, MockQuestions.items);
+    },
+    getQuestion(id) {
+        return self.questions.find(d => d.question_id === parseInt(id), 10);
     }
 }));
 

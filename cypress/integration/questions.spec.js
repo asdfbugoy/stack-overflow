@@ -5,7 +5,7 @@ context('Component', () => {
 
     });
     describe('Visits List Page', () => {
-        it('visits the local server', () => {
+        it('Visits the local server', () => {
             cy.visit('/');
         });
 
@@ -17,6 +17,36 @@ context('Component', () => {
                     && cy.get('[data-cy=information]');
 
                 expect(d.find('[data-cy=question]').length).lte(15);
+            });
+        });
+
+
+    });
+
+    describe('Visits Detailed Page', () => {
+        it('Clicks the first Title and navigate to Detailed Page', () => {
+            cy.get('[data-cy=click-to-detail]:eq(0)').click();
+        });
+
+        it('Checks Vote Up and Vote Down buttons', () => {
+
+
+            cy.get('[data-cy=score]').then(firstScore => {
+                const first = parseInt(firstScore.text(),10);
+                cy.get('[data-cy=score-up]').click();
+                cy.get('[data-cy=score]').then(secondScore => {
+                    const second = parseInt(secondScore.text(),10);
+                    expect(second).eq(first + 1);
+                });
+            });
+
+            cy.get('[data-cy=score]').then(firstScore => {
+                const first = parseInt(firstScore.text(),10);
+                cy.get('[data-cy=score-down]').click();
+                cy.get('[data-cy=score]').then(secondScore => {
+                    const second = parseInt(secondScore.text(),10);
+                    expect(second).eq(first - 1);
+                });
             });
         });
     });
