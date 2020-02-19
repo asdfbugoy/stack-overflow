@@ -12,5 +12,11 @@ context('App', () => {
         it('Renders the App', () => {
             cy.get('[data-cy=app]');
         });
+
+        it('Renders App elements', () => {
+            cy.get('[data-cy=app] [data-cy=header]');
+            cy.get('[data-cy=app] [data-cy=main]');
+            cy.get('[data-cy=app] [data-cy=footer]');
+        });
     });
 });

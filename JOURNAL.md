@@ -14,4 +14,16 @@ eslint
 
 cypress
 
-bootstrap 4
+bootstrap 4 && fontawesome
+
+initial commit for list of question layout
+
+cypress test for questions
+
+setup mobx mobx-react mobx-state-tree mobx-devtools-mst
+
+setup store
+    index / Root
+    Questions
+
+

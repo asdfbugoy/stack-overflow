@@ -10,12 +10,16 @@ gh-pages and git:
     https://github.com/asdfbugoy/stack-overflow
 
 Software used/installed: ( MacOS )
+    
     Brew (optional)
+        
         NodeJS
+            
             serve ( use to test production build at localhost:5000)
             yarn ( optional use than popular npm )
 
 Tools Used:
+   
     GIT Pages ( more comfortable than aws, heroku )
     React ( more comfortable than Vue )
     Create React App ( easy to use than custom webpack config build setup )
@@ -23,6 +27,8 @@ Tools Used:
     Eslint
     Cypress
     Bootstrap 4
+    Mobx Mobx-State-Tree
+
 
 ## `yarn start` `npm run start`
 
