@@ -25,15 +25,15 @@ const Question = (props) => {
         </div>
         <div data-cy="information" className="col">
             <a href="" data-cy="click-to-detail" className="overflow-hidden" onClick={onClick}>{title}</a>
-            <div className="overflow-hidden">{body}</div>
-            <div className="mb-3">
+            <div data-cy="body" className="overflow-hidden">{body}</div>
+            <div data-cy="tags" className="mb-3">
                 {tags.map((d, i) => <span key={i} className="badge badge-info mr-1">{d}</span>)}
             </div>
             {owner && <div className="row text-right">
                 <div className="col p-0"><img height="32" src={`${owner.profile_image ? owner.profile_image : 'https://via.placeholder.com/32'}`} alt="" /></div>
                 <div className="col-auto">
                     <div>asked 0 mins ago</div>
-                    <div>{owner.display_name}</div>
+                    <a data-cy="owner-name" target="_blank" rel="noopener noreferrer" href={owner.link}>{owner.display_name}</a>
                     <div>
                         <span className="badge badge-danger mr-1">{owner.badge_counts.gold}</span>
                         <span className="badge badge-light mr-1">{owner.badge_counts.silver}</span>

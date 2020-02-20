@@ -11,6 +11,6 @@ const mstDebug = () => {
     onSnapshot(store, snapshot => console.log('Snapshot: ', snapshot));
 };
 
-// process.env.NODE_ENV === 'development' && mstDebug();
+process.env.NODE_ENV === 'development' && mstDebug();
 
 ReactDOM.render(<Provider value={store}><App /></Provider>, document.getElementById('root'));

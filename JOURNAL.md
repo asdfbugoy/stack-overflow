@@ -27,5 +27,9 @@ setup store
     Questions
 
 React-Router
+    useHistory
+    useParams
 
-
+implement List of Questions
+implement Detailed Page and VoteUp VoteDown
+implement Add Questions

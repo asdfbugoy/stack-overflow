@@ -5,7 +5,7 @@ import MockQuestions from 'mock-api/questions.json';
 
 const Store = types.model({
     questions: types.array(Question, [])
-}).views(self => ({
+}).views(() => ({
 
 })).actions(self => ({
     afterCreate() {
@@ -16,6 +16,9 @@ const Store = types.model({
     },
     getQuestion(id) {
         return self.questions.find(d => d.question_id === parseInt(id), 10);
+    },
+    addQuestion(data) {
+        self.questions.unshift(data);
     }
 }));
 

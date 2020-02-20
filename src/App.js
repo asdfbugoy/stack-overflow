@@ -33,7 +33,7 @@ const App = () => {
         </Router>
 
         <footer data-cy="footer" className="text-center">
-            <div className="card-body bg-dark text-white"><i className="fa fa-stack-overflow"></i> Stack Overflow:  Front-End / Challenge © 2020 Stock Overflow: exam taken by @Francis Samande Declaro</div>
+            <div className="card-body bg-dark text-white"><i className="fa fa-stack-overflow"></i> <small>Stack Overflow:  Front-End / Challenge © 2020 Stock Overflow: exam taken by @Francis Samande Declaro</small></div>
         </footer>
     </div>;
 };

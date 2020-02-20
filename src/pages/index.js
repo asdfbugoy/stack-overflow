@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import Question from 'components/Question';
+import { useHistory } from 'react-router-dom';
 
 const List = props => {
     const { store } = props;
     const { questions } = store;
     React.useEffect(() => {
-        store.questions.length === 0 && store.fetchQuestionsAPI();
+        // store.questions.length === 0 && store.fetchQuestionsAPI();
     }, [store]);
+    const history = useHistory();
+
     return <section data-cy="questions">
         <header className="border-bottom pb-3 mb-3">
             <div className="row mb-3">
                 <div className="col">All Questions</div>
-                <div className="col-auto"><div className="btn btn-sm btn-primary">Ask Question</div></div>
+                <div className="col-auto"><div data-cy="btn-add-question" className="btn btn-sm btn-primary" onClick={() => history.push('/add')}>Ask Question</div></div>
             </div>
             <div className="row">
                 <div className="col-sm-auto mb-3 mb-sm-0">{store.questions.length} questions</div>
