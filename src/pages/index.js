@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import Question from 'components/Question';
 import { useHistory } from 'react-router-dom';
+import Pagination from 'components/Pagination';
 
 const List = props => {
     const { store } = props;
-    const { questions } = store;
+    const { pagination } = store;
     React.useEffect(() => {
-        // store.questions.length === 0 && store.fetchQuestionsAPI();
+        window.scrollTo(0, 0);
+        store.pagination.setPage(1);
+        store.questions.length === 0 && store.fetchQuestionsAPI();
     }, [store]);
     const history = useHistory();
 
@@ -39,17 +42,10 @@ const List = props => {
             </div>
         </header>
 
-        {questions.map((d, i) => <Question key={i} data={d} id={i} />)}
+        {store.pagination.page && pagination.getQuestions().map((d, i) => <Question key={i} data={d} id={i} />)}
+        
+        <Pagination store={store} />
 
-        <nav data-cy="pagination">
-            <ul className="pagination justify-content-center table-responsive">
-                <li className="page-item"><button className="page-link"><i className="fa fa-angle-double-left"></i></button></li>
-                <li className="page-item"><button className="page-link"><i className="fa fa-angle-left"></i></button></li>
-                {Array.from({ length: 5 }).map((d, i) => <li key={i} className="page-item"><button className="page-link">{i + 1}</button></li>)}
-                <li className="page-item"><button className="page-link"><i className="fa fa-angle-right"></i></button></li>
-                <li className="page-item"><button className="page-link"><i className="fa fa-angle-double-right"></i></button></li>
-            </ul>
-        </nav>
     </section>;
 };
 

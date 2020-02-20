@@ -34,5 +34,5 @@ export default types.model({
     },
     scoreDown() {
         self.score = self.score - 1;
-    },
+    }
 }));

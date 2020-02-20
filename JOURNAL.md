@@ -33,3 +33,4 @@ React-Router
 implement List of Questions
 implement Detailed Page and VoteUp VoteDown
 implement Add Questions
+implement Pagination of 15 per page

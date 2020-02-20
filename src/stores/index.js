@@ -2,14 +2,16 @@ import React from 'react';
 import { types, applySnapshot } from 'mobx-state-tree';
 import Question from './Question';
 import MockQuestions from 'mock-api/questions.json';
+import Pagination from './Pagination';
 
 const Store = types.model({
-    questions: types.array(Question, [])
+    questions: types.array(Question, []),
+    pagination: types.maybe(Pagination)
 }).views(() => ({
 
 })).actions(self => ({
     afterCreate() {
-
+        self.pagination = Pagination.create();
     },
     fetchQuestionsAPI() {
         applySnapshot(self.questions, MockQuestions.items);

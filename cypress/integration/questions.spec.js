@@ -5,7 +5,6 @@ context('Component', () => {
 
     });
 
-
     describe('Visits List Page', () => {
         it('Visits the local server', () => {
             cy.visit('/');
@@ -14,14 +13,24 @@ context('Component', () => {
         it('Renders max of 15 questions with elements', () => {
             cy.get('[data-cy=questions]');
             cy.get('[data-cy=questions]').should(d => {
-                d.find('[data-cy=question]').length > 0
-                    && cy.get('[data-cy=status]')
-                    && cy.get('[data-cy=information]');
-
                 expect(d.find('[data-cy=question]').length).lte(15);
             });
         });
 
+        it('Display Pagination', () => {
+            cy.get('[data-cy=pagination]');
+        });
+
+        it('Click and Check Pagination buttons works', () => {
+            cy.get('[data-cy=pagination]').find('button').then(data => {
+                Array.from(data).map(d => {
+                    cy.get(d).click({ delay: 3000 });
+                    cy.get('[data-cy=questions]').should(d => {
+                        expect(d.find('[data-cy=question]').length).lte(15);
+                    });
+                });
+            });
+        });
 
     });
 
@@ -61,7 +70,7 @@ context('Component', () => {
                         expect(data.innerHTML).eq(tags[i]);
                     });
                 });
-                
+
             });
         });
         it('Checks if the user is HANDSOME', () => {
