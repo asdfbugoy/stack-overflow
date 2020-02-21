@@ -60,11 +60,11 @@ context('Component', () => {
 
         });
         it('Accepts Inputs and Submit and check if it is added', () => {
-            cy.get('[data-cy=title]').type('title');
-            cy.get('[data-cy=body]').type('body').should(d => {
+            cy.get('[data-cy=title]').type('How to pass Great Eastern Exam');
+            cy.get('[data-cy=body]').clear().type('Its hard to pass the exam. You need a lot of SMILE.').should(d => {
                 expect(d[0].value.length).lte(255);
             });
-            cy.get('[data-cy=tags]').type('javscript, react, mobx');
+            cy.get('[data-cy=tags]').type('Hope, Pass, Exam, Please, React-with-SMILE');
             cy.get('[data-cy=form]').then(form => {
                 const title = form.find('[data-cy=title]')[0].value;
                 const body = form.find('[data-cy=body]')[0].value;
@@ -98,7 +98,6 @@ context('Component', () => {
         });
 
         it('Checks Vote Up and Vote Down buttons', () => {
-
             cy.get('[data-cy=score]').then(firstScore => {
                 const first = parseInt(firstScore.text(), 10);
                 cy.get('[data-cy=score-up]').click();
@@ -116,6 +115,9 @@ context('Component', () => {
                     expect(second).eq(first - 1);
                 });
             });
+        });
+        it('Clicks 100 votes to pass', () => {
+            Array.from({length:100}).map(() => cy.get('[data-cy=score-up]').click());
         });
     });
 
