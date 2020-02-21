@@ -17,6 +17,7 @@ const Add = props => {
             question_id: Math.floor(Math.random() * Math.floor(100000000)),
             ...{title},
             ...{body},
+            body_markdown: body,
             tags: tags.split(','),
             owner: {
                 display_name: 'Francis Samande Declaro',

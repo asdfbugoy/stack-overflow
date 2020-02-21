@@ -17,6 +17,14 @@ context('Component', () => {
             });
         });
 
+        it('Checks topic description to have max 255 characters', () => {
+            cy.get('[data-cy=body]').should(data => {
+                Array.from(data).map((d) => {
+                    expect(d.innerHTML.length).lte(255 + 4);
+                });
+            });
+        });
+
         it('Display Pagination', () => {
             cy.get('[data-cy=pagination]');
         });

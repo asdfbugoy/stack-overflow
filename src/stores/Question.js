@@ -5,7 +5,7 @@ const Owner = types.model({
         bronze: 0,
         silver: 0,
         gold: 0
-    }),{}),
+    }), {}),
     reputation: 0,
     user_id: 0,
     user_type: '',
@@ -19,12 +19,15 @@ export default types.model({
     title: types.optional(types.string, ''),
     tags: types.frozen(),
     body: types.optional(types.string, ''),
+    body_markdown: types.optional(types.string, ''),
     score: types.optional(types.number, 0),
     view_count: types.optional(types.number, 0),
     answer_count: types.optional(types.number, 0),
     owner: types.maybe(Owner),
-}).views(() => ({
-
+}).views(self => ({
+    get body255() {
+        return self.body.length > 255 ? self.body_markdown.substring(0, Math.min(self.body_markdown.length, 255)) + ' ...' : self.body_markdown;
+    }
 })).actions(self => ({
     afterCreate() {
 

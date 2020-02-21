@@ -42,7 +42,7 @@ const List = props => {
             </div>
         </header>
 
-        {store.pagination.page && pagination.getQuestions().map((d, i) => <Question key={i} data={d} id={i} />)}
+        {store.pagination.page && pagination.getQuestions().map((d, i) => <Question key={i} data={d} />)}
         
         <Pagination store={store} />
 
